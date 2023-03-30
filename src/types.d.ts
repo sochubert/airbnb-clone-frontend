@@ -45,3 +45,8 @@ export interface IRoomPhotoPhoto {
     amenities: IAmenity[];
   }
   
+  export interface IReview {
+    payload: string;
+    rating: number;
+    user: IRoomOwner;
+  }

@@ -9,6 +9,7 @@ import {
   useDisclosure,
 } from "@chakra-ui/react";
 import { FaAirbnb, FaMoon, FaSun } from "react-icons/fa";
+import { Link } from "react-router-dom";
 import LoginModal from "./LoginModal";
 import SignUpModal from "./SignUpModal";
 
@@ -44,7 +45,9 @@ export default function Header() {
       borderBottomWidth={1}
     >
       <Box color={logoColor}>
-        <FaAirbnb size={"48"} />
+        <Link to={"/"}>
+          <FaAirbnb size={"48"} />
+        </Link>
       </Box>
       <HStack spacing={4}>
         <IconButton
