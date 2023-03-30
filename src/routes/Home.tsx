@@ -3,28 +3,12 @@ import { useQuery } from "@tanstack/react-query";
 import { getRooms } from "../api";
 import Room from "../components/Room";
 import RoomSkeleton from "../components/RoomSkeleton";
-
-interface IPhoto {
-  pk: string;
-  file: string;
-  description: string;
-}
-
-interface IRoom {
-  pk: number;
-  name: string;
-  country: string;
-  city: string;
-  price: number;
-  rating: number;
-  is_owner: boolean;
-  photos: IPhoto[];
-}
+import { IRoomList, IRoomPhotoPhoto } from "../types";
 
 export default function Home() {
   // rooms가 fetch한 결과물을 기억하는 작업의 key로 이용됨 (unique key)
   // React Query는 fetch함수에서 반환된 데이터를 이 rooms 이름으로 저장하게 된다.
-  const { isLoading, data } = useQuery<IRoom[]>(["rooms"], getRooms);
+  const { isLoading, data } = useQuery<IRoomList[]>(["rooms"], getRooms);
 
   return (
     <Grid
