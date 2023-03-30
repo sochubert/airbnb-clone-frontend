@@ -3,9 +3,11 @@ import {
   Button,
   HStack,
   IconButton,
+  useColorMode,
+  useColorModeValue,
   useDisclosure,
 } from "@chakra-ui/react";
-import { FaAirbnb, FaMoon } from "react-icons/fa";
+import { FaAirbnb, FaMoon, FaSun } from "react-icons/fa";
 import LoginModal from "./LoginModal";
 import SignUpModal from "./SignUpModal";
 
@@ -20,6 +22,10 @@ export default function Header() {
     onClose: onSignUpClose,
     onOpen: onSignUpOpen,
   } = useDisclosure();
+  const { toggleColorMode } = useColorMode();
+  const logoColor = useColorModeValue("red.500", "red.200");
+  const Icon = useColorModeValue(FaMoon, FaSun);
+
   return (
     <HStack
       justifyContent={"space-between"}
@@ -27,14 +33,15 @@ export default function Header() {
       px={"10"}
       borderBottomWidth={1}
     >
-      <Box color="red.500">
+      <Box color={logoColor}>
         <FaAirbnb size={"48"} />
       </Box>
       <HStack spacing={4}>
         <IconButton
+          onClick={toggleColorMode}
           variant={"ghost"}
           aria-label="Toggle dark mode"
-          icon={<FaMoon />}
+          icon={<Icon />}
         />
         <Button onClick={onLoginOpen}>Login</Button>
         <Button onClick={onSignUpOpen} colorScheme={"red"}>
