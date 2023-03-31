@@ -7,7 +7,6 @@ const instance = axios.create({
   // api호출 시, cookie를 함께 보낸다는 것, Django에서도 설정 필요
   withCredentials: true,
 });
-const BASE_URL = "http://127.0.0.1:8000/api/v1";
 
 export const getRooms = () =>
   instance.get("rooms/").then((response) => response.data);
@@ -40,3 +39,11 @@ export const githubLogIn = (code:string) =>
       "X-CSRFToken": Cookie.get("csrftoken") || "",
     }
   }).then((response) => response.status);
+
+
+export const kakaoLogin = (code:string) => 
+instance.post(`/users/kakao`, {code}, {
+  headers: {
+    "X-CSRFToken": Cookie.get("csrftoken") || "",
+  }
+}).then((response) => response.status);
