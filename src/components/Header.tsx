@@ -48,6 +48,7 @@ export default function Header() {
       status: "loading",
       position: "bottom-right",
     });
+
     await logOut();
     queryClient.refetchQueries(["me"]);
 
