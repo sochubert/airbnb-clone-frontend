@@ -43,6 +43,7 @@ export default function Home() {
         <Room
           key={room.pk}
           pk={room.pk}
+          isOwner={room.is_owner}
           imageUrl={
             room.photos.length >= 1
               ? room.photos[0].file
