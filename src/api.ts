@@ -26,24 +26,64 @@ export const getRoomReviews = ({ queryKey }: QueryFunctionContext) => {
 export const getMe = () =>
   instance.get(`users/me`).then((response) => response.data);
 
-export const logOut = () => 
-  instance.post(`users/log-out`, null, {
-    headers: {
-      "X-CSRFToken": Cookie.get("csrftoken") || "",
-    }
-  }).then(response => response.data);
+export const logOut = () =>
+  instance
+    .post(`users/log-out`, null, {
+      headers: {
+        "X-CSRFToken": Cookie.get("csrftoken") || "",
+      },
+    })
+    .then((response) => response.data);
 
-export const githubLogIn = (code:string) => 
-  instance.post(`/users/github`, {code}, {
-    headers: {
-      "X-CSRFToken": Cookie.get("csrftoken") || "",
-    }
-  }).then((response) => response.status);
+export const githubLogIn = (code: string) =>
+  instance
+    .post(
+      `/users/github`,
+      { code },
+      {
+        headers: {
+          "X-CSRFToken": Cookie.get("csrftoken") || "",
+        },
+      }
+    )
+    .then((response) => response.status);
 
+export const kakaoLogin = (code: string) =>
+  instance
+    .post(
+      `/users/kakao`,
+      { code },
+      {
+        headers: {
+          "X-CSRFToken": Cookie.get("csrftoken") || "",
+        },
+      }
+    )
+    .then((response) => response.status);
 
-export const kakaoLogin = (code:string) => 
-instance.post(`/users/kakao`, {code}, {
-  headers: {
-    "X-CSRFToken": Cookie.get("csrftoken") || "",
-  }
-}).then((response) => response.status);
+export interface IUsernameLoginVariables {
+  username: string;
+  password: string;
+}
+export interface IUsernameLoginSuccess {
+  ok: string;
+}
+export interface IUsernameLoginError {
+  error: string;
+}
+
+export const usernameLogIn = ({
+  username,
+  password,
+}: IUsernameLoginVariables) =>
+  instance
+    .post(
+      `/users/log-in`,
+      { username, password },
+      {
+        headers: {
+          "X-CSRFToken": Cookie.get("csrftoken") || "",
+        },
+      }
+    )
+    .then((response) => response.data);
